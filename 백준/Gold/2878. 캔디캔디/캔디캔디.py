@@ -17,9 +17,5 @@ while left < right:
         left = mid + 1
 
 rest = m-sum(map(lambda candy: max(0, candy-left), candies))
-ans = -(left**2 - (left-1)**2) * rest
-for candy in candies:
-    ans += min(candy, left) ** 2
-    ans &= MOD
-
-print(ans)
+ans = sum(map(lambda candy: min(candy, left) ** 2, candies)) - (left**2 - (left-1)**2) * rest
+print(ans & MOD)
