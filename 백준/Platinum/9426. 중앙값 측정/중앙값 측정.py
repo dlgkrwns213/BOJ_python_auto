@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 MAX = 1 << 16
 
@@ -25,17 +26,22 @@ def get_mid(node, rest):
 
 
 n, k = map(int, input().split())
-nums = [int(input()) for _ in range(n)]
 
 # 개수를 저장하는 segment tree
 tree = [0] * (MAX << 1)
-for num in nums[:k-1]:
+q = deque()
+for _ in range(k-1):
+    num = int(input())
+    q.append(num)
     update(num, 1, 0, MAX-1, 1)
 
 total = 0
-for i, num in enumerate(nums[k-1:]):
+for _ in range(k-1, n):
+    num = int(input())
+
     update(num, 1, 0, MAX-1, 1)
+    q.append(num)
     total += get_mid(0, (k-1) >> 1)
-    update(nums[i], -1, 0, MAX-1, 1)
+    update(q.popleft(), -1, 0, MAX-1, 1)
 
 print(total)
