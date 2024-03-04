@@ -2,7 +2,7 @@
 import sys
 from collections import deque
 input = sys.stdin.readline
-MAX = 1 << 17
+MAX = 1 << 16
 
 
 def update(idx, val, start, last, node):
@@ -27,20 +27,34 @@ def find_middle(node, rest):
 
 n, k = map(int, input().split())
 
-tree, q = [0] * (MAX << 1), deque()
+tree, q, mx_cnt = [0] * (MAX << 1), deque(), 0
 for _ in range(k-1):
     num = int(input())
     q.append(num)
-    update(num, 1, 0, MAX-1, 1)
+    if num == MAX:
+        mx_cnt += 1
+    else:
+        update(num, 1, 0, MAX-1, 1)
 
 total = 0
 for _ in range(k-1, n):
     num = int(input())
     q.append(num)
-    update(num, 1, 0, MAX-1, 1)
+    if num == MAX:
+        mx_cnt += 1
+    else:
+        update(num, 1, 0, MAX-1, 1)
 
-    total += find_middle(1, (k-1)//2)
+    if mx_cnt > k >> 1:
+        middle = MAX
+    else:
+        middle = find_middle(1, (k-1) // 2)
+    total += middle
 
-    update(q.popleft(), -1, 0, MAX-1, 1)
+    delete = q.popleft()
+    if delete == MAX:
+        mx_cnt -= 1
+    else:
+        update(delete, -1, 0, MAX-1, 1)
 
 print(total)
