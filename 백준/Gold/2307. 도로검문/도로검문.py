@@ -1,3 +1,4 @@
+# https://www.acmicpc.net/problem/2307
 import sys
 from heapq import heappush, heappop
 input = sys.stdin.readline
