@@ -5,23 +5,33 @@ input = sys.stdin.readline
 INF = float('inf')
 
 
-def dfs(now, time, money):
-    if costs[now]:
-        xt, xm = costs[now][0]
-        if xt < time and xm < money:
-            return
-    heappush(costs[now], (money, time))
+def dijkstra():
+    xt = mx_time + 1
 
-    if now == n:
-        return
+    moneys = [INF] * (n+1) * xt
+    moneys[xt] = 0
 
-    for nxt, nt, nm in graph[now]:
-        nxt_time = nt + time
-        nxt_money = nm + money
-        if nxt_time > mx_time or nxt_money > mx_money:
+    hq = []
+    heappush(hq, (0, xt))
+
+    while hq:
+        money, tn = heappop(hq)
+        now, time = divmod(tn, xt)
+        if now == n:
+            return money
+        if moneys[now * xt + time] < money:
             continue
 
-        dfs(nxt, nxt_time, nxt_money)
+        for nxt, nt, nm in graph[now]:
+            nxt_time = nt + time
+            nxt_money = nm + money
+            if nxt_time > mx_time or nxt_money > mx_money:
+                continue
+            nxt_tn = nxt * xt + nxt_time
+            if moneys[nxt_tn] > nxt_money:
+                moneys[nxt_tn] = nxt_money
+                heappush(hq, (nxt_money, nxt_tn))
+    return -1
 
 
 n = int(input())
@@ -32,8 +42,4 @@ for _ in range(int(input())):
     graph[a].append((b, t, m))
     graph[b].append((a, t, m))
 
-
-costs = [[] for _ in range(n+1)]
-dfs(1, 0, 0)
-
-print(costs[n][0][0] if costs[n] else -1)
+print(dijkstra())
