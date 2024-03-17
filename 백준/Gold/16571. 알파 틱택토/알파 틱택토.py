@@ -1,6 +1,6 @@
 # https://www.acmicpc.net/problem/16571
 def checking(idx, player):
-    a, b, c, d, e, f, g, h, i = sum(board, [])
+    a, b, c, d, e, f, g, h, i = board
     if idx == 0:
         if (player, player) in ((b, c), (d, g), (e, i)):
             return True
@@ -37,24 +37,23 @@ def backtracking(rest, player):
 
     ret = -2
     for i in range(9):
-        x, y = divmod(i, 3)
-        if board[x][y]:
+        if board[i]:
             continue
 
-        board[x][y] = player
+        board[i] = player
         if checking(i, player):
             ret = 1
         else:
             ret = max(ret, backtracking(rest-1, 3-player))
-        board[x][y] = 0
+        board[i] = 0
 
     return -ret
 
 
-board = [list(map(int, input().split())) for _ in range(3)]
-zero = sum(map(lambda line: line.count(0), board))
-one = sum(map(lambda line: line.count(1), board))
-two = sum(map(lambda line: line.count(2), board))
+board = sum([list(map(int, input().split())) for _ in range(3)], [])
+zero = board.count(0)
+one = board.count(1)
+two = board.count(2)
 
 first = 1 if one == two else 2
 
