@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 31120 KB, 시간: 912 ms
+메모리: 31120 KB, 시간: 832 ms
 
 ### 분류
 
@@ -12,13 +12,13 @@
 
 ### 제출 일자
 
-2024년 3월 18일 11:38:13
+2024년 3월 19일 01:30:34
 
 ### 문제 설명
 
 <p>가희는 고구마를 정말 좋아합니다.</p>
 
-<p style="text-align: center;"><img alt="" src="https://imgur.com/F3lqKOu"><img alt="" src="https://i.imgur.com/F3lqKOu.png" style="width: 209px; height: 348px;"></p>
+<p style="text-align: center;"><img alt="" src=""><img alt="" src="" style="width: 209px; height: 348px;"></p>
 
 <p>이번에도 어김 없이 고구마 냄새가 났는데, 고구마가 보이지 않습니다. 오빠가 방 안에 고구마를 숨겨 놓았기 때문입니다.</p>
 

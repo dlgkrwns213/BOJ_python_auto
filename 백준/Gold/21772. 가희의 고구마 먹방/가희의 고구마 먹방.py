@@ -11,10 +11,10 @@ def find_kahee():
                 return i, j
 
 
-def backtracking(move, x, y, sw_visited, sw_count):
+def backtracking(move, x, y, sw_list):
     global mx
     if move == t:
-        mx = max(mx, sw_count)
+        mx = max(mx, len(set(sw_list)))
         return
 
     for a, b in go:
@@ -25,10 +25,11 @@ def backtracking(move, x, y, sw_visited, sw_count):
             continue
 
         if board[nx][ny] == 'S':
-            bit = 1 << (nx * c + ny)
-            backtracking(move+1, nx, ny, sw_visited | bit, sw_count + (not (sw_visited & bit)))
+            sw_list.append(nx*c+ny)
+            backtracking(move+1, nx, ny, sw_list)
+            sw_list.pop()
         else:
-            backtracking(move+1, nx, ny, sw_visited, sw_count)
+            backtracking(move+1, nx, ny, sw_list)
 
 
 r, c, t = map(int, input().split())
@@ -36,5 +37,5 @@ board = [input().rstrip() for _ in range(r)]
 
 sx, sy = find_kahee()
 mx = 0
-backtracking(0, sx, sy, 0, 0)
+backtracking(0, sx, sy, [])
 print(mx)
