@@ -3,7 +3,7 @@ import sys
 from heapq import heappop, heappush
 input = sys.stdin.readline
 INF = float('inf')
-TRANS_WEIGHT = 10000
+TRANS_WEIGHT = 1001
 
 
 def dijkstra():
