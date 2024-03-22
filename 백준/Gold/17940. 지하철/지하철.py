@@ -3,32 +3,29 @@ import sys
 from heapq import heappop, heappush
 input = sys.stdin.readline
 INF = float('inf')
+TRANS_WEIGHT = 10000
 
 
 def dijkstra():
-    costs = [(INF, INF)] * n
-    costs[0] = (0, 0)
+    costs = [INF] * n
+    costs[0] = 0
 
     hq = []
-    heappush(hq, (0, 0, 0))
+    heappush(hq, (0, 0))
 
     while hq:
-        trans, money, now = heappop(hq)
+        cost, now = heappop(hq)
         if now == m:
-            return trans, money
+            return divmod(cost, TRANS_WEIGHT)
 
-        min_trans, min_money = costs[now]
-        if min_trans < trans or (min_trans == trans and min_money < money):
+        if costs[now] < cost:
             continue
 
         for nxt, nm in graph[now]:
-            nxt_trans = trans + (1 if company[now] != company[nxt] else 0)
-            nxt_money = money + nm
-
-            save_trans, save_money = costs[nxt]
-            if save_trans > nxt_trans or (save_trans == nxt_trans and save_money > nxt_money):
-                costs[nxt] = (nxt_trans, nxt_money)
-                heappush(hq, (nxt_trans, nxt_money, nxt))
+            nxt_cost = cost + (TRANS_WEIGHT if company[now] != company[nxt] else 0) + nm
+            if costs[nxt] > nxt_cost:
+                costs[nxt] = nxt_cost
+                heappush(hq, (nxt_cost, nxt))
 
 
 n, m = map(int, input().split())
