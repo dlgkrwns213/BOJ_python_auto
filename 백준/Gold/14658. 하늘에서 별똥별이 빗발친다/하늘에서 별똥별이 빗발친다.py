@@ -2,10 +2,8 @@
 import sys
 input = sys.stdin.readline
 
-
 n, m, l, k = map(int, input().split())
 stars = sorted(list(map(int, input().split())) for _ in range(k))
-
 
 mx = 0
 for left, locations in enumerate(stars):
@@ -28,10 +26,7 @@ for left, locations in enumerate(stars):
 
     up = 0
     for down, y in enumerate(y_locations):
-        while up < cnt:
-            if y_locations[up] - y > l:
-                break
-
+        while up < cnt and y_locations[up] - y <= l:
             up += 1
 
         mx = max(mx, up - down)
