@@ -7,7 +7,9 @@ def big_small_separate():
         else:
             small.append(-x)
 
-    return sorted(big), sorted(small)
+    big.sort()
+    small.sort()
+    return big, small
 
 
 def get_pair(big, small):
