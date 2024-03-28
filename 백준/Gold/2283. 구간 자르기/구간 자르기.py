@@ -27,7 +27,5 @@ while right < mx:
         possible = True
         break
 
-if possible:
-    print(left, right)
-else:
-    print(0, 0)
+ans = (left, right) if possible else (0, 0)
+print(*ans)
