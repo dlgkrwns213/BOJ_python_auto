@@ -16,13 +16,13 @@ def dijkstra():
         weight, now = heappop(hq)
         if distances[now] < weight:
             continue
-        dist, cnt = divmod(weight, 1000)
+        dist, cnt = divmod(weight, 101)
         if now == n:
             return dist, cnt
 
         for nxt, nd in graph[now]:
             nxt_dist = nd + dist
-            nxt_weight = (nxt_dist * 1000) + cnt + 1
+            nxt_weight = (nxt_dist * 101) + cnt + 1
             if distances[nxt] > nxt_weight:
                 distances[nxt] = nxt_weight
                 heappush(hq, (nxt_weight, nxt))
