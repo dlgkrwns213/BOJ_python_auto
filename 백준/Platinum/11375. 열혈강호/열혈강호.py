@@ -9,7 +9,11 @@ def dfs(person):
     visited[person] = True
 
     for work in works[person]:
-        if matched[work] == -1 or dfs(matched[work]):
+        if matched[work] == -1:
+            matched[work] = person
+            return True
+    for work in works[person]:
+        if dfs(matched[work]):
             matched[work] = person
             return True
     return False
