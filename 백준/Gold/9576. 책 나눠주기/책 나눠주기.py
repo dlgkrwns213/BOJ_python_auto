@@ -9,7 +9,11 @@ def dfs(now):
 
     a, b = book_range[now]
     for book in range(a, b+1):
-        if matched[book] == -1 or dfs(matched[book]):
+        if matched[book] == -1:
+            matched[book] = now
+            return True
+    for book in range(a, b+1):
+        if dfs(matched[book]):
             matched[book] = now
             return True
     return False
