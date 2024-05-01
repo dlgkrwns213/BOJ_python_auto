@@ -15,12 +15,13 @@ def cutting(length):
 
 n, m, l = map(int, input().split())
 locations = [int(input()) for _ in range(m)] + [l]
+mn = min(map(lambda i: locations[i+1]-locations[i], range(m)))
 
 ans = []
 for _ in range(n):
     q = int(input())
 
-    left, right = 0, l
+    left, right = mn, l
     while left < right:
         mid = left + right >> 1
         if cutting(mid):
