@@ -5,7 +5,7 @@ from collections import defaultdict
 input = sys.stdin.readline
 
 t, n = map(int, input().split())
-hq, rest = [], defaultdict(int)
+hq, rest = [], [0] * 1000001
 for _ in range(n):
     ids, id_rest, prior = map(int, input().split())
     heappush(hq, (-prior, ids))
