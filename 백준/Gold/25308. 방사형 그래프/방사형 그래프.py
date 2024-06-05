@@ -1,4 +1,4 @@
-# https://www.acmicpc.net/problem/25308\
+# https://www.acmicpc.net/problem/25308
 from itertools import permutations
 get_mn = lambda x, y: (2 ** 0.5) * x * y / (x + y)
 
