@@ -21,7 +21,7 @@ for _ in range(n):
         imp.append((s, l))
 
 uim_count = len(uim)
-left, right = 1, int(1e10)
+left, right = 1, 2 * int(1e9) + 1
 while left < right:
     mid = left + right >> 1
     if get_bacterias(mid) > g:
