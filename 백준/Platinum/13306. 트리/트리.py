@@ -1,6 +1,7 @@
 # https://www.acmicpc.net/problem/13306
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**5)
 
 
 def find(a):
