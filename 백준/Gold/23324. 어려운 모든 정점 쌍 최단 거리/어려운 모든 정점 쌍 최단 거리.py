@@ -26,18 +26,18 @@ def union(a, b):
 
 n, m, k = map(int, input().split())
 parent, rank = list(range(n+1)), [1] * (n+1)
-x, y = -1, -1
-for i in range(1, m+1):
+for i in range(k-1):
     u, v = map(int, input().split())
-    if i == k:
-        x, y = u, v
-    else:
-        union(u, v)
+    union(u, v)
+x, y = map(int, input().split())
+for i in range(m-k):
+    u, v = map(int, input().split())
+    union(u, v)
+
 
 if find(x) == find(y):
     print(0)
 else:
     groups = [find(node) for node in range(n+1)]
     x_group_cnt = groups.count(find(x))
-    y_group_cnt = groups.count(find(y))
-    print(x_group_cnt * y_group_cnt)
+    print(x_group_cnt * (n-x_group_cnt))
