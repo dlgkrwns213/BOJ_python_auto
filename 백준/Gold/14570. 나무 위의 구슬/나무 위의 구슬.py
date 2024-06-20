@@ -6,7 +6,6 @@ input = sys.stdin.readline
 
 class Node:
     def __init__(self, value):
-        self.parent = 0
         self.child = []
         self.leaf_counts = []
 
@@ -40,10 +39,8 @@ nodes: list[Node] = [Node(i) for i in range(n+1)]
 for i in range(1, n+1):
     u, v = map(int, input().split())
     if u != -1:
-        nodes[u].parent = i
         nodes[i].child.append(u)
     if v != -1:
-        nodes[v].parent = i
         nodes[i].child.append(v)
 
 dfs(1)
