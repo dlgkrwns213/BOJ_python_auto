@@ -5,7 +5,6 @@ ranks = [-1] + list(map(int, input().split())) + [-1]
 total = 0
 for _ in range(n-1):
     idx = ranks.index(max(ranks))
-    num = ranks[idx]
-    total += num - max(ranks[idx+1], ranks[idx-1])
-    ranks.remove(num)
+    total += ranks[idx] - max(ranks[idx+1], ranks[idx-1])
+    ranks.remove(ranks[idx])
 print(total)
