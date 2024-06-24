@@ -17,10 +17,10 @@ def white(now):
         for nx in graph[x]:
             if visited[nx]:
                 continue
-            visited[nx] = 1
 
             if a[nx] == '0':
                 st.append(nx)
+                visited[nx] = 1
             else:
                 cnt += 1
 
