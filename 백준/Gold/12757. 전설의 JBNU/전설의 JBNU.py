@@ -5,10 +5,6 @@ input = sys.stdin.readline
 INF = float('inf')
 
 
-def add(key):
-    ...
-
-
 def find_idx(key):
     idx = bisect_left(keys, key)
     small, big = keys[idx-1], keys[idx]
