@@ -10,7 +10,7 @@ n = int(input())
 computers = [x for _ in range(n) for x in map(int, input().split())]
 
 half = sum(computers)+1 >> 1
-left, right = 0, int(1e7) + 1
+left, right = 0, max(computers)
 while left < right:
     mid = left + right >> 1
     if turnon(mid) >= half:
