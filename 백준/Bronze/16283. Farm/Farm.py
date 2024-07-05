@@ -6,12 +6,11 @@ if x == y:
         print(1, 1)
     else:
         print(-1)
-elif n * y < w < n * x:
-    gap = n * x - w
-    if gap % (x-y):
+elif n*y < w < n*x:
+    t, r = divmod(n*x - w, x-y)
+    if r:
         print(-1)
     else:
-        t = gap // (x-y)
         if a < b:
             print(t, n-t)
         else:
