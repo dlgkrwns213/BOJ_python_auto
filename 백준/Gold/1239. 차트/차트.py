@@ -10,6 +10,6 @@ for now in permutations(nums, n):
         prefix[i] = prefix[i-1] + now[i-1]
 
     spre = set(prefix)
-    mx = max(mx, sum(map(lambda x: 1 if x+50 in spre else 0, prefix)))
+    mx = max(mx, sum(map(lambda x: 1 if x+50 in spre else 0, prefix[1:])))
 
-print(max(mx-1, 0))
+print(mx)
