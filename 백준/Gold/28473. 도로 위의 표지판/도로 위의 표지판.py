@@ -23,7 +23,7 @@ def union(x, y):
 
 n, m = map(int, input().split())
 roads = [list(map(int, input().split())) for _ in range(m)]
-roads.sort(key=lambda road: (road[2], road[3]))
+roads.sort(key=lambda road: road[2]*int(1e6)+road[3])
 
 parent, rank = list(range(n+1)), [1] * (n+1)
 write, total = [], 0
