@@ -34,6 +34,5 @@ for i, j, v in distances:
     if find(i) != find(j):
         union(i, j)
         links.append((i+1, j+1))
-links.sort()
 
 print('\n'.join(map(lambda line: ' '.join(map(str, line)), links)))
