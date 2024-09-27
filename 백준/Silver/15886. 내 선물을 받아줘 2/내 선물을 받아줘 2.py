@@ -1,9 +1,9 @@
 n = int(input())
-board = ['E']
 
+now, cnt = 'E', 0
 for x in input():
-    if x == board[-1]:
-        continue
-    board.append(x)
+    if x != now:
+        now = x
+        cnt += 1
 
-print(len(board)>>1)
+print(cnt+1>>1)
