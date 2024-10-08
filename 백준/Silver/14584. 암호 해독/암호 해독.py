@@ -9,9 +9,8 @@ def change_word(word, cnt):
 
 def find():
     for i in range(26):
-        for new_word in map(lambda word: change_word(word, i), words):
-            if new_word in code:
-                return -i
+        if any(change_word(word, i) in code for word in words):
+            return -i
 
 
 if __name__ == '__main__':
