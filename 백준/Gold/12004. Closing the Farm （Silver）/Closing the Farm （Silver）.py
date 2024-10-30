@@ -1,42 +1,46 @@
-# https://www.acmicpc.net/problem/12004
+# https://www.acmicpc.net/problem/12012
 import sys
 input = sys.stdin.readline
 
 
-def find(x):
-    if x == parent[x]:
-        return x
-    parent[x] = find(parent[x])
-    return parent[x]
+def find(a):
+    if parent[a] == a:
+        return parent[a]
+    parent[a] = find(parent[a])
+    return parent[a]
 
 
-def union(x, y):
-    x, y = map(find, (x, y))
+def union(a, b):
+    x = find(a)
+    y = find(b)
+    if x == y:
+        return
 
-    if rank[x] >= rank[y]:
-        rank[x] += rank[y]
+    if rank[x] > rank[y]:
         parent[y] = x
+        rank[x] += rank[y]
     else:
-        rank[y] += rank[x]
         parent[x] = y
+        rank[y] += rank[x]
 
 
 n, m = map(int, input().split())
-connects = [[0]*(n+1) for _ in range(n+1)]
+graph = [[] for _ in range(n+1)]
 for _ in range(m):
-    i, j = map(int, input().split())
-    connects[i][j] = 1
-    connects[j][i] = 1
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-opened, ans = [], []
-rank, parent = [1] * (n+1), list(range(n+1))
-for now in [int(input()) for _ in range(n)][::-1]:
-    for opn in opened:
-        if connects[opn][now]:
-            union(opn, now)
-    opened.append(now)
+closing = [int(input()) for _ in range(n)]
+opened = [0] * (n+1)
+parent, rank = list(range(n+1)), [1] * (n+1)
+ans = []
+for idx, now in enumerate(closing[::-1]):
+    opened[now] = 1
+    for near in graph[now]:
+        if opened[near]:
+            union(now, near)
 
-    fo = find(opened[0])
-    ans.append(1 if all(find(opn) == fo for opn in opened) else 0)
+    ans.append(idx+1 == rank[find(now)])
 
 print('\n'.join(map(lambda x: 'YES' if x else 'NO', ans[::-1])))
