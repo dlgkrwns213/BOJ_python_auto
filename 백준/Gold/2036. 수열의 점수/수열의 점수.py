@@ -5,11 +5,8 @@ input = sys.stdin.readline
 
 def get_max(nums):
     ret = 0
-    while len(nums) > 1:
-        a, b = nums.pop(), nums.pop()
-        ret += a * b
-
-    ret += nums.pop() if nums else 0
+    while nums:
+        ret += nums.pop() * (nums.pop() if nums else 1)
     return ret
 
 
