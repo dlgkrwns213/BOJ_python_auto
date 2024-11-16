@@ -7,7 +7,7 @@ INF = float('inf')
 
 def dijkstra():
     input()
-    homes = sorted(map(int, input().split()))
+    homes = list(map(int, input().split()))
 
     distances = [INF] * (n+1)
     hq = []
@@ -27,9 +27,7 @@ def dijkstra():
                 heappush(hq, (nxt_dist, nxt))
 
     mn = min(map(lambda home: distances[home], homes))
-    for home in homes:
-        if distances[home] == mn:
-            return home
+    return min(home for home in homes if distances[home] == mn)
 
 
 n, m = map(int, input().split())
