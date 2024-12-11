@@ -1,0 +1,1 @@
+print('\n'.join(map(lambda ipt:str((int(ipt)+1>>1)**2),(input()for _ in range(int(input()))))))
