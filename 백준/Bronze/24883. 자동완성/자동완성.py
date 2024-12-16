@@ -1,0 +1,1 @@
+print(f'Naver {"D2" if input() in "nN" else "Whale"}')
