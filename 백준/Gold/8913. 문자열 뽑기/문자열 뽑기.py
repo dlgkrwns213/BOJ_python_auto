@@ -12,16 +12,21 @@ def backtracking(now):
         fin = True
         return
 
-    for idx, count in enumerate(now):
-        if count == 1:
+    for idx in range(len(now)):
+        if now[idx] == 1:
             continue
 
+        nxt = now[:]
         if idx == 0:
-            backtracking(now[1:])
+            nxt.pop(0) 
         elif idx == len(now) - 1:
-            backtracking(now[:-1])
+            nxt.pop() 
         else:
-            backtracking(now[:idx-1] + [now[idx-1]+now[idx+1]] + now[idx+2:])
+            nxt[idx-1] += nxt[idx+1]
+            del nxt[idx:idx+2]
+
+        backtracking(nxt)
+
 
 ans = []
 for _ in range(int(input())):
