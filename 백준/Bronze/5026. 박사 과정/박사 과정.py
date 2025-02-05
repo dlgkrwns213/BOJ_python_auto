@@ -3,4 +3,4 @@ for _ in range(int(input())):
     if ipt == 'P=NP':
         print('skipped')
     else:
-        print(eval(ipt))
+        print(sum(map(int, ipt.split('+'))))
