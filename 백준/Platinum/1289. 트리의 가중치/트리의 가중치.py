@@ -13,8 +13,11 @@ def dfs(node, parent):
             continue
 
         nxt_weight = dfs(child, node)
-        total += weight * nxt_weight * w
+        total += (weight * nxt_weight * w) % MOD
         weight += nxt_weight * w
+
+        total %= MOD
+        weight %= MOD
 
     return weight
 
@@ -28,4 +31,4 @@ for _ in range(n-1):
 
 total = 0
 dfs(1, 0)
-print(total % MOD)
+print(total)
