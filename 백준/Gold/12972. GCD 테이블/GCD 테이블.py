@@ -12,14 +12,12 @@ def get_max():
 
     ret = mx
     del counter[mx]
-    mx = max(counter)  # 새로운 mx
+    mx = max(counter, default=0)  # 새로운 mx
     return ret
 
 
 def find_nums():
     global mx
-    if n == 1:
-        return gcds
 
     nums = [get_max()]
     for _ in range(n-1):
