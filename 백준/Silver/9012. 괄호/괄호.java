@@ -1,28 +1,34 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int n = scanner.nextInt();
-        for (int t=0;t<n;t++) {
-            String s = scanner.next();
+        int n = Integer.parseInt(br.readLine());
+        for (int t = 0; t < n; t++) {
+            String s = br.readLine();
+            int count = 0;
             boolean possible = true;
 
-            int count = 0;
-            for (int i=0;i<s.length();i++) {
+            for (int i = 0; i < s.length(); i++) {
                 char p = s.charAt(i);
-                count += s.charAt(i) == '(' ? 1 : -1;
+                count += (p == '(') ? 1 : -1;
                 if (count < 0) {
                     possible = false;
                     break;
                 }
             }
 
-            if (count != 0)
+            if (count != 0) {
                 possible = false;
+            }
 
-            System.out.println(possible ? "YES" : "NO");
+            bw.write(possible ? "YES\n" : "NO\n");
         }
+
+        bw.flush();
+        br.close();
+        bw.close();
     }
 }
