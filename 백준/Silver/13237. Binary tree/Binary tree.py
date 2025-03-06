@@ -5,17 +5,17 @@ input = sys.stdin.readline
 
 def bfs(start):
     q = deque()
-    q.append(start)
+    q.append((start, 0))
 
     depths = [-1] * (n+1)
     depths[start] = 0
 
     while q:
-        now = q.popleft()
+        now, depth = q.popleft()
         for nxt in graph[now]:
             if depths[nxt] == -1:
-                depths[nxt] = depths[now] + 1
-                q.append(nxt)
+                depths[nxt] = depth + 1
+                q.append((nxt, depth+1))
 
     return depths
 
