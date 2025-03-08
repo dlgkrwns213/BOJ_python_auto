@@ -8,7 +8,7 @@ public class Main {
         String s = sc.next();
 
         for (int i = s.length()-1; i >= 0; i--) {
-            System.out.println(n * Character.getNumericValue(s.charAt(i)));
+            System.out.println(n * (s.charAt(i) - '0'));
         }
 
         System.out.println(n * Integer.parseInt(s));
