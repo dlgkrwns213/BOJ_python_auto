@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -8,11 +6,11 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         int t = Integer.parseInt(st.nextToken());
 
-        StringBuilder ans = new StringBuilder();
         for (int unused = 0; unused < t; unused++) {
             String number = new StringTokenizer(br.readLine()).nextToken();
 
@@ -35,20 +33,23 @@ public class Main {
             }
 
             if (change == small) {
-                ans.append("BIGGEST\n");
+                bw.write("BIGGEST\n");
                 continue;
             }
 
             String ret = number.substring(0, number.length() - behind.size() + 1) + change;
             behind.remove(Character.valueOf(change));
             ret += behind.stream()
-                        .sorted()
-                        .skip(1)
-                        .map(String::valueOf)
-                        .collect(Collectors.joining());
+                    .sorted()
+                    .skip(1)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining());
 
-            ans.append(ret+'\n');
+            bw.write(ret + "\n");
         }
-        System.out.println(ans);
+
+        bw.flush();
+        bw.close();
+        br.close();
     }
 }
