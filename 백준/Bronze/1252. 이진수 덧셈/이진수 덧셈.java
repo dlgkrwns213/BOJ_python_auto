@@ -21,10 +21,10 @@ public class Main {
         if (carry == 1)
             ans.append(1);
 
-        while (ans.length() > 0 && ans.charAt(ans.length() - 1) == '0') {
+        while (!ans.isEmpty() && ans.charAt(ans.length() - 1) == '0') {
             ans.setLength(ans.length() - 1);
         }
 
-        System.out.println(ans.length() > 0 ? ans.reverse() : 0);
+        System.out.println(!ans.isEmpty() ? ans.reverse() : 0);
     }
 }
