@@ -9,6 +9,7 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         ArrayDeque<Integer> queue = new ArrayDeque<>();
+        int last = -1;  // queue 는 마지막값을 기본으로 지원하지 않으므로 저장해준다.
 
         int n = Integer.parseInt(new StringTokenizer(br.readLine()).nextToken());
         for (int unused = 0; unused < n; unused++) {
@@ -16,10 +17,13 @@ public class Main {
             String command = st.nextToken();
 
             if (command.equals("push")) {
-                queue.offer(Integer.parseInt(st.nextToken()));
+                int number = Integer.parseInt(st.nextToken());
+                queue.offer(number);
+                last = number;
             } else if (command.equals("pop")) {
                 bw.write(String.valueOf(queue.isEmpty() ? -1 : queue.poll()));
                 bw.newLine();
+                last = queue.isEmpty() ? -1 : last;
             } else if (command.equals("size")) {
                 bw.write(String.valueOf(queue.size()));
                 bw.newLine();
@@ -30,7 +34,7 @@ public class Main {
                 bw.write(String.valueOf(queue.isEmpty() ? -1 : queue.peek()));
                 bw.newLine();
             } else if (command.equals("back")) {
-                bw.write(String.valueOf(queue.isEmpty() ? -1 : queue.getLast()));
+                bw.write(String.valueOf(queue.isEmpty() ? -1 : last));
                 bw.newLine();
             }
         }
