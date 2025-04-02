@@ -32,8 +32,8 @@ public class Main {
         }
 
         if (possible) {
-            for (char c: ans.toString().toCharArray()) {
-                bw.write(c);
+            for (int i = 0; i < ans.length(); i++) {
+                bw.write(ans.charAt(i));
                 bw.newLine();
             }
         }
