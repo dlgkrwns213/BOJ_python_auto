@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(new StringTokenizer(br.readLine()).nextToken());
 
@@ -30,10 +31,15 @@ public class Main {
             }
         }
 
-        System.out.println(possible ?
-                ans.chars()
-                        .mapToObj(c -> String.valueOf((char)c))
-                        .collect(Collectors.joining("\n"))
-                : "NO");
+        if (possible) {
+            for (char c: ans.toString().toCharArray()) {
+                bw.write(c);
+                bw.newLine();
+            }
+        }
+        else {
+            bw.write("NO");
+        }
+        bw.flush();
     }
 }
