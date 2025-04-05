@@ -14,7 +14,6 @@ for _ in range(int(input())):
     nc, mc = map(change, (city[:2], state_code))
     counts[nc * 676 + mc] += 1
 
-
 count = 0
 for i, v in enumerate(counts):
     x, y = divmod(i, 676)
