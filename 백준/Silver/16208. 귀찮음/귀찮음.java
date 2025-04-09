@@ -18,7 +18,7 @@ public class Main {
             int one = heap.poll();
             int two = heap.poll();
 
-            total += one * two;
+            total += (long)one * two;
             heap.add(one+two);
         }
 
