@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 
 public class Main {
@@ -18,35 +17,36 @@ public class Main {
                     .toArray();
         }
 
-        backtracking(new int[n/2], 0, 0, n, numbers);
+        backtracking(0, 0, 0, n, numbers);
         System.out.println(mn);
     }
 
-    public static void backtracking(int[] one, int oneCount, int idx, int n, int[][] numbers) {
+    public static void backtracking(int one, int oneCount, int idx, int n, int[][] numbers) {
         if (oneCount == n / 2) {
-            int[] another = IntStream.range(0, n)
-                    .filter(i -> Arrays.stream(one).noneMatch(x -> x == i))
-                    .toArray();
+            int another = 0;
+            for (int i = 0; i < n; i++) {
+                int iBit = 1 << i;
+                if ((iBit & one) == 0)
+                    another |= iBit;
+            }
 
-            mn = Math.min(mn, Math.abs(getScore(one, numbers) - getScore(another, numbers)));
+            mn = Math.min(mn, Math.abs(getScore(one, n, numbers) - getScore(another, n, numbers)));
             return;
         }
         if (idx == n)
             return;
 
         backtracking(one, oneCount, idx+1, n, numbers);  // 현재 사람은 팀 안함
-
-        // 현재 사람 팀함
-        one[oneCount] = idx;
-        backtracking(one, oneCount+1, idx+1, n, numbers);
-        one[oneCount] = -1;
+        backtracking(one | (1 << idx), oneCount+1, idx+1, n, numbers);  // 현재 사람 팀함
     }
 
-    public static int getScore(int[] team, int[][] numbers) {
+    public static int getScore(int team, int n, int[][] numbers) {
         int score = 0;
-        for (int i: team) {
-            for (int j: team)
-                score += numbers[i][j];
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                if (((1 << i) & team) != 0 && ((1 << j) & team) != 0)
+                    score += numbers[i][j] + numbers[j][i];
+            }
         }
         return score;
     }
