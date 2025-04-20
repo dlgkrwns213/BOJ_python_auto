@@ -16,9 +16,10 @@ public class Main {
 
     public static void combination(int use, int count, int n, int m) {
         if (count == m) {
-            System.out.println(Arrays.stream(ans)
-                    .mapToObj(String::valueOf)
-                    .collect(Collectors.joining(" ")));
+            StringBuilder sb = new StringBuilder();
+            for (int num: ans)
+                sb.append(num).append(' ');
+            System.out.println(sb);
             return;
         }
 
