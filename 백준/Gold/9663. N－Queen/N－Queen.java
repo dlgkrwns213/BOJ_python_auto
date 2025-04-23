@@ -1,4 +1,3 @@
-// https://www.acmicpc.net/problem/9663
 import java.util.Scanner;
 
 public class Main {
@@ -26,27 +25,26 @@ public class Main {
             }
         }
 
-        backtracking(n, ru, rd, 0, 0, 0, 0, 0, 0);
+        backtracking(n, ru, rd, 0, 0, 0, 0, 0);
 
         System.out.println(total);
     }
 
-    public static void backtracking(int n, int[] ru, int[] rd, int startIdx, int count, int rowUse, int colUse, long upUse, long downUse) {
+    public static void backtracking(int n, int[] ru, int[] rd, int startIdx, int count, int colUse, int upUse, int downUse) {
         if (count == n) {
             total++;
             return;
         }
 
-        for (int idx = startIdx; idx < n * n; idx++) {
-            int rowBit = 1 << (idx / n);
+        for (int idx = startIdx; idx < startIdx+n; idx++) {
             int colBit = 1 << (idx % n);
-            long upBit = 1L << ru[idx];
-            long downBit = 1L << rd[idx];
+            int upBit = 1 << ru[idx];
+            int downBit = 1 << rd[idx];
 
-            if ((rowUse & rowBit) != 0 || (colUse & colBit) != 0 || (upUse & upBit) != 0 || (downUse & downBit) != 0)
+            if ((colUse & colBit) != 0 || (upUse & upBit) != 0 || (downUse & downBit) != 0)
                 continue;
 
-            backtracking(n, ru, rd, idx+1, count+1, rowUse | rowBit, colUse | colBit, upUse | upBit, downUse | downBit);
+            backtracking(n, ru, rd, startIdx+n, count+1, colUse | colBit, upUse | upBit, downUse | downBit);
         }
     }
 }
