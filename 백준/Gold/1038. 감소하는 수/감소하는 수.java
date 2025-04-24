@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Main {
     static ArrayList<Long> possibles = new ArrayList<>();
-    static int ans = -1;
     public static void main(String[] args) {
         int n = new Scanner(System.in).nextInt();
 
