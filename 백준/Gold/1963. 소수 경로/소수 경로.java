@@ -57,9 +57,9 @@ public class Main {
                 return count;
 
             for (int bit = 1; bit <= 1000; bit*=10) {
-                int up = now / (bit * 10);
-                int down = now % bit;
-                int num = up * bit * 10 + down;
+//                int up = now / (bit * 10);
+//                int down = now % bit;
+                int num = now / (bit * 10) * bit * 10 + now % bit;  // abcd -> 0bcd, a0cd, ab0d, abc0
                 for (int i = 0; i < 10; i++) {
                     int nxt = num + i * bit;
                     if (!isPrime[nxt] || visited[nxt])
