@@ -11,18 +11,18 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        Boolean[][] board = new Boolean[n][m];
+        int[][] board = new int[n][m];
         for (int i = 0; i < n; i++) {
             board[i] = br.readLine()
                     .chars()
-                    .mapToObj(c -> c == '1')
-                    .toArray(Boolean[]::new);
+                    .map(c -> c - '0')
+                    .toArray();
         }
 
         System.out.println(bfs(board, n, m));
     }
 
-    public static int bfs(Boolean[][] board, int n, int m) {
+    public static int bfs(int[][] board, int n, int m) {
         int[] goX = {-1, 1, 0, 0};
         int[] goY = {0, 0, -1, 1};
 
@@ -52,7 +52,7 @@ public class Main {
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m)
                     continue;
 
-                int nxtVc = bc + (board[nx][ny] ? 1 : 0);
+                int nxtVc = bc + board[nx][ny];
                 if (brokenCounts[nx][ny] > nxtVc) {
                     brokenCounts[nx][ny] = nxtVc;
                     q.add(new int[]{nx, ny, cnt+1, nxtVc});
