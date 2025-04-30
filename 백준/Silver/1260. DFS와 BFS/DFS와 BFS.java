@@ -1,68 +1,66 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
-
-public class Main {
-    public static StringBuilder ans = new StringBuilder();
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int start = Integer.parseInt(st.nextToken());
-
-        List<List<Integer>> graph = new ArrayList<>();
-        for (int unused = 0; unused <= n; unused++)
-            graph.add(new LinkedList<>());
-        for (int unused = 0; unused < m; unused++) {
-            st = new StringTokenizer(br.readLine());
-            int u = Integer.parseInt(st.nextToken());
-            int v = Integer.parseInt(st.nextToken());
-            graph.get(u).add(v);
-            graph.get(v).add(u);
-        }
-
-        for (int i = 0; i <= n; i++)
-            graph.get(i).sort(Integer::compareTo);
-
-        dfs(graph, start, new boolean[n+1]);
-        ans.append('\n');
-        bfs(graph, start, n);
-
-        System.out.println(ans);
-    }
-
-    public static void dfs(List<List<Integer>> graph, int now, boolean[] visited) {
-        visited[now] = true;
-        ans.append(now).append(' ');
-
-        for (int nxt: graph.get(now)) {
-            if (!visited[nxt])
-                dfs(graph, nxt, visited);
+public class Main{
+    static StringBuilder sb = new StringBuilder();
+    public static void DFS(int curV, List<List<Integer>> graph, boolean[] visited) {
+        visited[curV] = true;
+        sb.append(curV).append(" ");
+        for (int next : graph.get(curV)) {
+            if (!visited[next]) {
+                DFS(next, graph, visited);
+            }
         }
     }
-
-    public static void bfs(List<List<Integer>> graph, int start, int n) {
-        boolean[] visited = new boolean[n+1];
-        visited[start] = true;
-
-        Queue<Integer> q = new ArrayDeque<>();
-        q.add(start);
-
+    public static void BFS(int startV, List<List<Integer>> graph, boolean[] visited) {
+        Queue<Integer> q = new ArrayDeque<>(10_000);
+        q.add(startV);
+        visited[startV] = true;
+        sb.append(startV).append(" ");
         while (!q.isEmpty()) {
-            int now = q.poll();
-            ans.append(now).append(' ');
-
-            for (int nxt: graph.get(now)) {
-                if (!visited[nxt]) {
-                    visited[nxt] = true;
-                    q.add(nxt);
+            int curV = q.remove();
+            for (int next : graph.get(curV)) {
+                if (!visited[next]) {
+                    q.add(next);
+                    visited[next] = true;
+                    sb.append(next).append(" ");
                 }
             }
         }
+
+    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int V = Integer.parseInt(st.nextToken());
+
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i <= N; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int i = 0; i<M; i++) {
+            StringTokenizer nst = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(nst.nextToken());
+            int b = Integer.parseInt(nst.nextToken());
+            graph.get(a).add(b);
+            graph.get(b).add(a);
+        }
+
+        for (int i =0; i<=N; i++) {
+            Collections.sort(graph.get(i));
+        }
+
+
+        //DFS
+        boolean[] visited = new boolean[N+1];
+        DFS(V,graph, visited);
+        sb.append("\n");
+        //BFS
+        visited = new boolean[N+1];
+        BFS(V, graph, visited);
+
+        System.out.println(sb.toString());
     }
 }
