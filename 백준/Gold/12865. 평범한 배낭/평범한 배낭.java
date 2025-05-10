@@ -18,15 +18,10 @@ public class Main {
             int nowWeight = Integer.parseInt(st.nextToken());
             int nowValue = Integer.parseInt(st.nextToken());
 
-            int[] nxt = new int[k+1];
-            for (int w = 0; w <= k; w++) {
-                if (w < nowWeight)
-                    nxt[w] = now[w];
-                else
-                    nxt[w] = Math.max(now[w], now[w-nowWeight] + nowValue);
+            for (int w = k; w >= nowWeight; w--) {
+                now[w] = Math.max(now[w], now[w-nowWeight] + nowValue);
             }
 
-            now = nxt;
         }
 
         System.out.println(now[k]);
