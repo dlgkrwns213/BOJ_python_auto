@@ -16,6 +16,10 @@ def bfs():
     go = [(i, j) for i in (-1, 0, 1) for j in (-1, 0, 1) if i or j]
 
     visited = [[INF]*m for _ in range(n)]
+    for i in range(n):
+        for j in range(m):
+            if board[i][j] == '#':
+                visited[i][j] = -INF
     visited[sx][sy] = 0
 
     q = deque()
@@ -29,8 +33,6 @@ def bfs():
         for a, b in go:
             nx, ny = x + a, y + b
             if nx < 0 or nx >= n or ny < 0 or ny >= m:
-                continue
-            if board[nx][ny] == '#':
                 continue
 
             if b == 1:
