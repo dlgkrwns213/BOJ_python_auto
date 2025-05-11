@@ -1,0 +1,1 @@
+print('\n'.join(map(lambda x: str(2**x-1), (int(input()) for _ in range(int(input()))))))
