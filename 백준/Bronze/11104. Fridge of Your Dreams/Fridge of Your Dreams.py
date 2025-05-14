@@ -1,0 +1,1 @@
+print('\n'.join(map(lambda x: str(int(x, 2)), (input() for _ in range(int(input()))))))
