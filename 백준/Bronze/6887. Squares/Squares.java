@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        int sideLength = (int)Math.sqrt(n);
-        System.out.println("The largest square has side length " + sideLength + ".");
+        System.out.println("The largest square has side length " + (int)Math.sqrt(n) + ".");
     }
 }
