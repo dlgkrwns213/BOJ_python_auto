@@ -1,0 +1,17 @@
+SELECT 
+    USER_ID, 
+    NICKNAME, 
+    CONCAT(CITY, ' ', STREET_ADDRESS1, ' ', STREET_ADDRESS2) as 전체주소, 
+    CONCAT(SUBSTRING(TLNO, 1, 3), '-', 
+        SUBSTRING(TLNO, 4, 4), '-', 
+        SUBSTRING(TLNO, 8)) as 전화번호
+FROM 
+    (SELECT WRITER_ID, COUNT(*) as CNT
+        FROM USED_GOODS_BOARD
+        GROUP BY WRITER_ID
+        HAVING CNT >= 3) ub
+    JOIN
+    USED_GOODS_USER uu
+    ON ub.WRITER_ID = uu.USER_ID
+ORDER BY
+    USER_ID DESC
