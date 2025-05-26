@@ -1,4 +1,4 @@
-# https://www.acmicpc.net/problem/30805
+# https://www.acmicpc.net/problem/9252
 def get_lcs() -> str:
     n, m = len(a), len(b)
     dp = [[0] * (m+1) for _ in range(n+1)]
