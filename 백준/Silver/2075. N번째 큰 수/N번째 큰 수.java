@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 
 public class Main {
@@ -10,26 +9,47 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
-        // 가장 큰 n개 수를 저장하는 최소 힙
-        PriorityQueue<Integer> maxNNumbers = new PriorityQueue<>();
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        // 기존에 N개 저장
-        while (st.hasMoreTokens())
-            maxNNumbers.add(Integer.valueOf(st.nextToken()));  // valueOf로 boxing 한 채로 저장
-
-        for (int unused = 1; unused < n; unused++) {
-            st = new StringTokenizer(br.readLine());
-            while (st.hasMoreTokens()) {
-                Integer number = Integer.valueOf(st.nextToken());
-                // 우선순위 큐에 존재하는 가장 작은 값보다 큰 경우에만 넣어주면서 가장 큰 N개만 유지
-                if (maxNNumbers.peek() < number) {
-                    maxNNumbers.poll();
-                    maxNNumbers.add(number);
-                }
-            }
+        int[][] numbers = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < n; j++)
+                numbers[i][j] = Integer.parseInt(st.nextToken());
         }
 
-        System.out.println(maxNNumbers.peek());
+        // O(N^2)
+        int[] maxNumbers = new int[n];
+        for (int i = 0; i < n; i++) {
+            int[] maxNumberData = getMaxNumberData(numbers[i]);
+            numbers[i][maxNumberData[0]] = Integer.MIN_VALUE;
+            maxNumbers[i] = maxNumberData[1];
+        }
+
+        int ans = -1;
+        for (int unused = 0; unused < n; unused++) {
+            // O(N)
+            int[] maxMaxNumberData = getMaxNumberData(maxNumbers);
+            int idx = maxMaxNumberData[0];
+            ans = maxMaxNumberData[1];
+            // System.out.println(ans);
+
+            // O(N)
+            // 최대 값이 있던 줄에서 그 다음 큰 수를 가져옴
+            int[] nxtMaxNumberData = getMaxNumberData(numbers[idx]);
+            numbers[idx][nxtMaxNumberData[0]] = Integer.MIN_VALUE;
+            maxNumbers[idx] = nxtMaxNumberData[1];
+        }
+
+        System.out.println(ans);
+    }
+
+    public static int[] getMaxNumberData(int[] numbers) {
+        int idx = 0, maxNumber = Integer.MIN_VALUE;
+        for (int i = 0; i < numbers.length; i++) {
+            if (maxNumber < numbers[i]) {
+                maxNumber = numbers[i];
+                idx = i;
+            }
+        }
+        return new int[]{idx, maxNumber};
     }
 }
