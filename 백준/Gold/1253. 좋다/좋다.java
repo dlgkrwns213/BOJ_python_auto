@@ -26,14 +26,14 @@ public class Main {
             int want = numbers[idx];
 
             int left = 0;
-            int right = n-1;
+            int right = n-1;  // 중복있어서 그냥 무조건 처음부터 끝까지 했음
 
             while (left < right) {
                 if (left == idx)
                     left++;
                 else if (right == idx)
                     right--;
-                else {
+                else {  // 원하는 값이 둘 중 하나라도 겹치지 않은 경우에만
                     int now = numbers[left] + numbers[right];
                     if (now < want)
                         left++;
