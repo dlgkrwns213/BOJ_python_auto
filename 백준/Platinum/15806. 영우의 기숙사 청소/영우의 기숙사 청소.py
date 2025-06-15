@@ -29,7 +29,7 @@ def bfs():
             # print(sum(map(sum, visited)), finish)
 
             if sum(map(sum, visited)) == finish:
-                if bit == 3 or (t-d) % 2 != 0:
+                if bit == 3 or (t-d) % 2:
                     return visited
                 else:
                     return [[x^1 for x in line] for line in visited]
