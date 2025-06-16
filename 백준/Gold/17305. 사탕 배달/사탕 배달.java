@@ -26,6 +26,10 @@ public class Main {
         threes.sort(Comparator.reverseOrder());
         fives.sort(Comparator.reverseOrder());
 
+        System.out.println(getMax(threes, w, fives));
+    }
+
+    private static long getMax(List<Integer> threes, int w, List<Integer> fives) {
         int threeIdx = Math.min(threes.size(), w / 3);
         int rest = w - 3 * threeIdx;
         int fiveIdx = Math.min(fives.size(), rest / 5);
@@ -50,7 +54,6 @@ public class Main {
             }
 
         }
-
-        System.out.println(mx);
+        return mx;
     }
 }
