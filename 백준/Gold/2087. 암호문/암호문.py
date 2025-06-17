@@ -9,14 +9,13 @@ want = int(input())
 left = n >> 1
 make = {}
 for i in range(1 << left):
-    subset = tuple(j for j in range(n) if (i >> j) & 1)
-    make[sum(map(lambda x: numbers[x], subset))] = subset
+    bitstring = format(i, f'0{left}b')
+    make[sum(map(lambda x: numbers[x] if bitstring[x] == '1' else 0, range(left)))] = bitstring
 
 right = n - left
 for i in range(1 << right):
-    subset = tuple(j+left for j in range(n) if (i >> j) & 1)
-    find = want - sum(map(lambda x: numbers[x], subset))
+    bitstring = format(i, f'0{right}b')
+    find = want - sum(map(lambda x: numbers[left+x] if bitstring[x] == '1' else 0, range(right)))
     if find in make:
-        answer_number = make[find] + subset
-        print(''.join(map(lambda x: '1' if x in answer_number else '0', range(n))))
+        print(make[find] + bitstring)
         break
