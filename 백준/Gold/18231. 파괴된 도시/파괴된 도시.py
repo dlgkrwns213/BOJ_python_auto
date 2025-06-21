@@ -21,8 +21,7 @@ for destroy in destroys:
 real = set()
 for possible in possibles:
     real.add(possible)
-    for near in graph[possible]:
-        real.add(near)
+    real.update(graph[possible])
 
 if len(real) == len(destroys):
     print(len(possibles))
