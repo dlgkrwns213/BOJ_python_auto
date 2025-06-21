@@ -12,7 +12,7 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        List<Integer>[] graph = new ArrayList[n+1];
+        List<Integer>[] graph = new ArrayList[n + 1];
         for (int i = 1; i <= n; i++)
             graph[i] = new ArrayList<>();
 
@@ -30,15 +30,15 @@ public class Main {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        Set<Integer> destoryedCitySet = Arrays.stream(destroyedCities)
+        Set<Integer> destroyedCitySet = Arrays.stream(destroyedCities)
                 .boxed()
                 .collect(Collectors.toSet());
 
         List<Integer> bombPossibleCities = new ArrayList<>();
-        for (int destroyedCity: destroyedCities) {
+        for (int destroyedCity : destroyedCities) {
             boolean possible = true;
-            for (int near: graph[destroyedCity]) {
-                if (!destoryedCitySet.contains(near)) {
+            for (int near : graph[destroyedCity]) {
+                if (!destroyedCitySet.contains(near)) {
                     possible = false;
                     break;
                 }
@@ -49,7 +49,7 @@ public class Main {
         }
 
         Set<Integer> destroyedPossibleCitySet = new HashSet<>();
-        for (int bombPossibleCity: bombPossibleCities) {
+        for (int bombPossibleCity : bombPossibleCities) {
             destroyedPossibleCitySet.add(bombPossibleCity);
             destroyedPossibleCitySet.addAll(graph[bombPossibleCity]);
         }
@@ -57,7 +57,7 @@ public class Main {
         StringBuilder ans = new StringBuilder();
         if (destroyedPossibleCitySet.size() == destroyedCities.length) {
             ans.append(bombPossibleCities.size()).append('\n');
-            for (int bombPossibleCity: bombPossibleCities)
+            for (int bombPossibleCity : bombPossibleCities)
                 ans.append(bombPossibleCity).append(' ');
         } else
             ans.append(-1);
