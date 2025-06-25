@@ -1,6 +1,10 @@
 import sys
 input = sys.stdin.readline
-hashed = lambda s: s[0] + s[-1] + ''.join(sorted(s))
+
+
+def hashed(s: str):
+    return s[0] + s[-1] + ''.join(sorted(s))
+
 
 words = dict()
 for _ in range(int(input())):
