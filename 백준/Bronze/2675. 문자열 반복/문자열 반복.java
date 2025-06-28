@@ -14,9 +14,11 @@ public class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
 
             int r = Integer.parseInt(st.nextToken());
-            String[] s = st.nextToken().split("");
-            for (String c: s)
-                ans.append(c.repeat(r));
+            String s = st.nextToken();
+            for (char c: s.toCharArray()) {
+                for (int unused = 0; unused < r; unused++)
+                    ans.append(c);
+            }
             ans.append('\n');
         }
 
