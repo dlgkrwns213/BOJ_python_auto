@@ -1,25 +1,22 @@
-from heapq import heappush, heappop
+from heapq import heappop, heappush
+
 
 def solution(jobs):
-    jobs.sort()
-    
-    n = len(jobs)
-    job_index = 0
-    now = 0
-    total = 0
     hq = []
-
-    while job_index < n or hq:
-        while job_index < n and jobs[job_index][0] <= now:
-            start, time = jobs[job_index]
-            heappush(hq, (time, start))
-            job_index += 1
+    start_time = [0] * len(jobs)
+    for idx, job in enumerate(jobs):
+        start, time = job
+        start_time[idx] = start
+        heappush(hq, (time, start, idx))
         
-        if hq:
-            time, start = heappop(hq)
-            now += time
-            total += now - start
-        else:
-            now = jobs[job_index][0]
-
-    return total // n
+    total = 0
+    now = 0
+    while hq:
+        time, start, idx = heappop(hq)
+        
+        now = max(now, start) + time
+        total += now - start_time[idx]
+        
+    return total // len(jobs)
+        
+    
