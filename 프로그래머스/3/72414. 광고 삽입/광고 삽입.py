@@ -11,7 +11,7 @@ def num_to_time(num):
 
 def solution(play_time, adv_time, logs):
     play, adv = map(time_to_num, (play_time, adv_time))
-    MAX = 360001
+    MAX = 36000
     counts = [0] * MAX
     
     # imos
@@ -28,9 +28,9 @@ def solution(play_time, adv_time, logs):
         counts[time] += counts[time-1]
         
     max_count, max_time = counts[adv], 0
-    for start in range(play - adv + 1):
+    for start in range(play - adv):
         end = start + adv - 1
-        current = counts[end] - counts[start-1]
+        current = counts[end] - counts[start - 1]
         if current > max_count:
             max_count = current
             max_time = start
