@@ -20,10 +20,6 @@ class Solution {
         int[] distancesA = dijkstra(graph, n, a);
         int[] distancesB = dijkstra(graph, n, b);
         
-        System.out.println(Arrays.toString(distancesS));
-        System.out.println(Arrays.toString(distancesA));
-        System.out.println(Arrays.toString(distancesB));
-        
         int mnDist = (int)1e8;
         for (int idx = 0; idx <= n; idx++) {
             int nowDist = distancesS[idx] + distancesA[idx] + distancesB[idx];
@@ -34,7 +30,7 @@ class Solution {
     }
     
     public int[] dijkstra(List<List<int[]>> graph, int n, int start) {
-        int INF = (int)1e8;  // 1000000000
+        int INF = (int)1e8;  // 100000000
         int[] distances = new int[n+1];
         Arrays.fill(distances, INF);  // 배열을 전부 INF 로 초기화
         distances[start] = 0;
