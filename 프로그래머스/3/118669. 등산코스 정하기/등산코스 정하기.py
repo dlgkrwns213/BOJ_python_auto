@@ -1,8 +1,8 @@
-from heapq import heappop, heappush
-INF = float('inf')
+from heapq import heappush, heappop
 
 
-def dijkstra(n, graph, gates, summit_sets):
+def dijkstra(n, graph, gates, summits_set):
+    INF = float('inf')
     distances = [INF] * (n+1)
     hq = []
     
@@ -13,18 +13,18 @@ def dijkstra(n, graph, gates, summit_sets):
     while hq:
         dist, now = heappop(hq)
         
-        if now in summit_sets or distances[now] < dist:
+        if now in summits_set or distances[now] < dist:
             continue
             
-        for nxt, nw in graph[now]:
-            nxt_dist = max(dist, nw)
+        for nxt, nd in graph[now]:
+            nxt_dist = max(nd, dist)
+            
             if distances[nxt] > nxt_dist:
                 distances[nxt] = nxt_dist
                 heappush(hq, (nxt_dist, nxt))
                 
     return distances
-    
-    
+
 
 def solution(n, paths, gates, summits):
     graph = [[] for _ in range(n+1)]
@@ -33,13 +33,4 @@ def solution(n, paths, gates, summits):
         graph[v].append((u, w))
         
     distances = dijkstra(n, graph, gates, set(summits))
-    answer_node = -1
-    answer_val = INF
-
-    for e in sorted(summits):
-        if distances[e] < answer_val:
-            answer_node = e
-            answer_val = distances[e]
-
-    return [answer_node, answer_val]
-    
+    return min([(summit, distances[summit]) for summit in summits], key=lambda x: (x[1], x[0]))
