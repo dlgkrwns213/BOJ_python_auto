@@ -1,5 +1,4 @@
-from heapq import heappop, heappush
-
+from heapq import heappush, heappop
 
 def solution(jobs):
     jobs.sort()
@@ -7,10 +6,11 @@ def solution(jobs):
     n, idx = len(jobs), 0
     total, now = 0, 0
     hq = []
+    
     while idx < n or hq:
         while idx < n:
             start, time = jobs[idx]
-            if start > now:
+            if now< start:
                 break
                 
             heappush(hq, (time, start))
@@ -22,5 +22,5 @@ def solution(jobs):
             total += now - start
         else:
             now = jobs[idx][0]
-        
+            
     return total // n
