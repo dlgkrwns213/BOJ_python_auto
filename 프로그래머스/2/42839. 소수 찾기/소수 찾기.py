@@ -1,27 +1,27 @@
 from math import sqrt
 
-
+s = set()
+def solution(numbers):
+    backtracking(numbers, 0, "0")
+    return len(s)
+    
+    
+def backtracking(numbers, used, make):
+    if is_prime(int(make)):
+        s.add(int(make))
+        
+    for idx, val in enumerate(numbers):
+        idx_bit = 1 << idx
+        if not idx_bit & used:
+            backtracking(numbers, used | idx_bit, make + val)
+        
+    
 def is_prime(n):
     if n in (0, 1):
         return False
-    for i in range(2, int(sqrt(n)) + 1):
-        if not n % i:
+    
+    for i in range(2, int(sqrt(n))+1):
+        if not n%i:
             return False
     return True
-
-
-def backtracking(primes, numbers, idx, make):
-    if is_prime(make):
-        primes.add(make)
-        
-    if len(numbers) == idx:
-        return
     
-    backtracking(primes, numbers, idx+1, make*10)
-    backtracking(primes, numbers, idx+1, make*10 + numbers[idx])
-    
-
-def solution(numbers):
-    primes = set()
-    backtracking(primes, list(map(int, numbers)), -1, 0)
-    return len(primes)
