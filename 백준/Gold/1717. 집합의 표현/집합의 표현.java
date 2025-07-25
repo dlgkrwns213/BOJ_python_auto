@@ -33,10 +33,11 @@ public class Main {
     }
 
     public static int find(int[] parent, int x) {
-        if (x == parent[x])
-            return x;
-        return find(parent, parent[x]);
+        if (x != parent[x])
+            parent[x] = find(parent, parent[x]);
+        return parent[x];
     }
+
 
     public static void union(int[] parent, int x, int y) {
         int px = find(parent, x);
