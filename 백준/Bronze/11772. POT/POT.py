@@ -1,0 +1,1 @@
+print(sum(map(lambda x: int(x[:-1])**int(x[-1]), [input() for _ in range(int(input()))])))
