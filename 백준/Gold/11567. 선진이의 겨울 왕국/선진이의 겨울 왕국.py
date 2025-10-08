@@ -23,7 +23,7 @@ def bfs() -> bool:
                 else:
                     continue
 
-            board[nx][ny] = 'X'
+            board[nx][ny] = 1
             q.append((nx, ny))
 
 
