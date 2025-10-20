@@ -7,27 +7,32 @@ def bfs():
     MOD = int(1e9) + 9
 
     q = deque()
-    q.append((0, 0))
+    q.append(0)
 
-    steps = [[-1]*c for _ in range(r)]
-    steps[0][0] = 0
+    steps = [-1] * r*c
+    steps[0] = 0
 
-    counts = [[1]*c for _ in range(r)]
+    counts = [1] * r*c
 
     while q:
-        x, y = q.popleft()
+        now = q.popleft()
+        
+        x, y = divmod(now, c)
         if (x, y) == (r-1, c-1):
-            return steps[x][y], counts[x][y]
+            return steps[now], counts[now]
 
         for a, b in go:
             nx, ny = x+a, y+b
-            if 0 <= nx < r and 0 <= ny < c:
-                if steps[nx][ny] == -1:
-                    steps[nx][ny] = steps[x][y] + 1
-                    counts[nx][ny] = counts[x][y]
-                    q.append((nx, ny))
-                elif steps[nx][ny] == steps[x][y] + 1:
-                    counts[nx][ny] = (counts[nx][ny] + counts[x][y]) % MOD
+            if nx < 0 or nx >= r or ny < 0 or ny >= c:
+                continue
+
+            nxt = nx * c + ny
+            if steps[nxt] == -1:
+                steps[nxt] = steps[now] + 1
+                counts[nxt] = counts[now]
+                q.append(nxt)
+            elif steps[nxt] == steps[now] + 1:
+                counts[nxt] = (counts[nxt] + counts[now]) % MOD
 
     return None,
 
