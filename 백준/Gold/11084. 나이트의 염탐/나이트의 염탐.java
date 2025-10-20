@@ -29,25 +29,23 @@ public class Main {
         int[] goX = {-2, -2, -1, -1, 1, 1, 2, 2};
         int[] goY = {-1, 1, -2, 2, -2, 2, -1, 1};
 
-        ArrayDeque<int[]> q = new ArrayDeque<>();
-        q.add(new int[]{0, 0});
+        ArrayDeque<Integer> q = new ArrayDeque<>();
+        q.add(0);
 
-        int[][] steps = new int[r][c];
-        for (int[] line: steps)
-            Arrays.fill(line, -1);
-        steps[0][0] = 0;
+        int[] steps = new int[r*c];
+        Arrays.fill(steps, -1);
+        steps[0] = 0;
 
-        int[][] counts = new int[r][c];
-        for (int[] line: counts)
-            Arrays.fill(line, 1);
+        int[] counts = new int[r*c];
+        Arrays.fill(counts, 1);
 
         while (!q.isEmpty()) {
-            int[] first = q.poll();
-            int x = first[0];
-            int y = first[1];
+            int now = q.poll();
+            int x = now / c;
+            int y = now % c;
 
             if (x == r-1 && y == c-1)
-                return new int[]{steps[x][y], counts[x][y]};
+                return new int[]{steps[now], counts[now]};
 
             for (int d = 0; d < 8; d++) {
                 int nx = x + goX[d];
@@ -55,13 +53,15 @@ public class Main {
 
                 if (nx < 0 || nx >= r || ny < 0 || ny >= c)
                     continue;
+                
+                int nxt = nx * c + ny;
 
-                if (steps[nx][ny] == -1) {
-                    steps[nx][ny] = steps[x][y] + 1;
-                    counts[nx][ny] = counts[x][y];
-                    q.add(new int[]{nx, ny});
-                } else if (steps[nx][ny] == steps[x][y] + 1) {
-                    counts[nx][ny] = (counts[nx][ny] + counts[x][y]) % MOD;
+                if (steps[nxt] == -1) {
+                    steps[nxt] = steps[now] + 1;
+                    counts[nxt] = counts[now];
+                    q.add(nxt);
+                } else if (steps[nxt] == steps[now] + 1) {
+                    counts[nxt] = (counts[nxt] + counts[now]) % MOD;
                 }
             }
         }
