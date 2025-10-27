@@ -23,10 +23,9 @@ def dijkstra():
 
             if distances[nxt] > nxt_dist:
                 distances[nxt] = nxt_dist
-                heappush(hq, (nxt, nxt_dist))
+                heappush(hq, (nxt_dist, nxt))
 
     return distances
-
 
 
 n = int(input())
