@@ -15,11 +15,10 @@ public class Main {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        if (nums[nums.length-1] != 0 || Arrays.stream(nums).sum() % 3 != 0)
-            System.out.println(-1);
-        else
-            System.out.println(Arrays.stream(nums).
-                    mapToObj(String::valueOf).
-                    collect(Collectors.joining()));
+        System.out.println(nums[nums.length-1] != 0 || Arrays.stream(nums).sum() % 3 != 0 
+                ? -1 
+                : Arrays.stream(nums).
+                mapToObj(String::valueOf).
+                collect(Collectors.joining()));
     }
 }
