@@ -44,6 +44,7 @@ public class Main {
             if (x == n-1 && y == m-1)
                 return cnt;
 
+            boolean rest = false;
             for (int goIdx = 0; goIdx < 4; goIdx++) {
                 int nx = x + goX[goIdx];
                 int ny = y + goY[goIdx];
@@ -63,7 +64,8 @@ public class Main {
                                 visited[nx][ny][broken + 1] = true;
                                 q.add(new int[]{nx, ny, cnt+1, broken + 1});
                             }
-                        } else {
+                        } else if (!rest) {
+                            rest = true;
                             q.add(new int[]{x, y, cnt+1, broken});
                         }
                     }
