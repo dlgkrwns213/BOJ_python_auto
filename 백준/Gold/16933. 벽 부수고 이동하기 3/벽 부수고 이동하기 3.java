@@ -31,8 +31,10 @@ public class Main {
         Queue<int[]> q = new ArrayDeque<>();
         q.add(new int[]{0, 0, 1, 0});
 
-        boolean[][][] visited = new boolean[n][m][k+1];
-        visited[0][0][0] = true;
+        int[][] visited = new int[n][m];
+        for (int[] line: visited)
+            Arrays.fill(line, k+1);
+        visited[0][0] = 0;
 
         while (!q.isEmpty()) {
             int[] first = q.poll();
@@ -53,15 +55,15 @@ public class Main {
                     continue;
 
                 if (board[nx][ny] == 0) {
-                    if (!visited[nx][ny][broken]) {
-                        visited[nx][ny][broken] = true;
+                    if (visited[nx][ny] > broken) {
+                        visited[nx][ny] = broken;
                         q.add(new int[]{nx, ny, cnt+1, broken});
                     }
                 } else {
                     if (broken != k) {
                         if (cnt % 2 == 1) {
-                            if (!visited[nx][ny][broken + 1]) {
-                                visited[nx][ny][broken + 1] = true;
+                            if (visited[nx][ny] > broken+1) {
+                                visited[nx][ny] = broken+1;
                                 q.add(new int[]{nx, ny, cnt+1, broken + 1});
                             }
                         } else if (!rest) {
