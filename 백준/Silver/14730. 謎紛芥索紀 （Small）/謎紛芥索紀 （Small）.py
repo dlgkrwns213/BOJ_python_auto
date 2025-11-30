@@ -1,0 +1,1 @@
+print(sum(map(lambda line: line[0] * line[1], [list(map(int, input().split())) for _ in range(int(input()))])))
