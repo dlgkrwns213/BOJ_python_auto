@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 34968 KB, 시간: 68 ms
+메모리: 14512 KB, 시간: 108 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2025년 12월 9일 16:08:28
+2025년 12월 9일 16:18:59
 
 ### 문제 설명
 
@@ -20,7 +20,7 @@
 
 <p>Sheba would like you to write a program that counts the closed loops in a rectangular array of black and white pixels. No two closed loops in the image touch or overlap. One particularly nasty species of cannibalistic amoeba is known to surround and engulf its neighbors; consequently there may be amoebas within amoebas. For instance, each of the images in Figure G.1 contains four amoebas.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 300px; height: 154px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/10d1900a-1988-4679-b9dc-e451888e3da5/-/preview/" style="width: 300px; height: 154px;"></p>
 
 <p style="text-align: center;">Figure G.1: Two Petri dishes, each with four amoebas.</p>
 
