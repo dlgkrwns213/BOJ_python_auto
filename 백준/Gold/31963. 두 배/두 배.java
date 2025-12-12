@@ -8,25 +8,29 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(br.readLine());
-        String[] nums = Arrays.stream(br.readLine().split(" "))
-                .map(Integer::parseInt)
-                .map(Integer::toBinaryString)
-                .toArray(String[]::new);
+        br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        String bef = "";
-        int count = 0;
-        for (String num: nums) {
-            int gap = bef.length() - num.length();
-            if (gap < 0 || (gap == 0 && num.compareTo(bef) >= 0))
-                bef = num;
-            else {
-                gap += (num + "0".repeat(gap)).compareTo(bef) < 0 ? 1 : 0;
-                bef = num + "0".repeat(gap);
-                count += gap;
+        long x = Long.parseLong(st.nextToken());
+        double logA_prev = Math.log(x) / Math.log(2);
+        long answer = 0;
+
+        while (st.hasMoreTokens()) {
+            x = Long.parseLong(st.nextToken());
+            double logA_curr = Math.log(x) / Math.log(2);
+
+            if (logA_curr < logA_prev) {
+                double diff = logA_prev - logA_curr;
+
+                long k = (long) Math.ceil(diff - 1e-12);
+
+                answer += k;
+                logA_curr += k;
             }
+
+            logA_prev = logA_curr;
         }
 
-        System.out.println(count);
+        System.out.println(answer);
     }
 }
