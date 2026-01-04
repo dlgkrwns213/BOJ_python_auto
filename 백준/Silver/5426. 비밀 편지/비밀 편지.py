@@ -2,15 +2,14 @@ import sys
 from math import sqrt
 input = sys.stdin.readline
 
+ans = []
 for _ in range(int(input())):
     s = input().rstrip()
 
     n = int(sqrt(len(s)))
-    board = [[s[i*n+j] for j in range(n)] for i in range(n)]
-
-    ans = []
     for j in range(n-1, -1, -1):
         for i in range(n):
-            ans.append(board[i][j])
+            ans.append(s[i*n+j])
+    ans.append('\n')
 
-    print(''.join(ans))
+print(''.join(ans))
