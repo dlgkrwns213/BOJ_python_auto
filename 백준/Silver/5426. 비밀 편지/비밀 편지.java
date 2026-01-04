@@ -6,18 +6,19 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int tc = Integer.parseInt(br.readLine());
+        StringBuilder ans = new StringBuilder();
         while (tc-- > 0) {
             String s = br.readLine();
 
             int n = (int) Math.sqrt(s.length());
-            StringBuilder ans = new StringBuilder();
 
             for (int j = n-1; j >= 0; j--) {
                 for (int i = 0; i < n; i++)
                     ans.append(s.charAt(i * n + j));
             }
-
-            System.out.println(ans);
+            ans.append('\n');
         }
+
+        System.out.println(ans);
     }
 }
