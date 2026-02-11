@@ -1,10 +1,9 @@
 SELECT ins.ANIMAL_ID, ins.ANIMAL_TYPE, ins.NAME
-FROM 
-    ANIMAL_INS ins
-    JOIN
-    ANIMAL_OUTS outs
-    ON ins.animal_id = outs.animal_id
-where  
-    SUBSTRING(ins.SEX_UPON_INTAKE, 1, 6) = 'Intact'
+FROM ANIMAL_INS AS ins
+JOIN ANIMAL_OUTS AS outs
+WHERE
+    ins.ANIMAL_ID = outs.ANIMAL_ID
     AND
-    SUBSTRING(outs.SEX_UPON_OUTCOME, 1, 6) <> 'Intact';
+    ins.SEX_UPON_INTAKE NOT IN ('Spayed Female', 'Spayed Male', 'Neutered Female', 'Neutered Male')
+    AND
+    outs.SEX_UPON_OUTCOME IN ('Spayed Female', 'Spayed Male', 'Neutered Female', 'Neutered Male')
