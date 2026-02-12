@@ -12,30 +12,30 @@ public class Main {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        List<Integer> lis = new ArrayList<>();
+        int[] lis = new int[n];
+        int right = -1;
 
         for (int number: numbers) {
-            if (lis.isEmpty() || lis.get(lis.size()-1) < number)
-                lis.add(number);
-            else {
-                int index = bisectLeft(lis, number);
-                lis.set(index, number);
+            if (right == -1 || lis[right] < number) {
+                lis[++right] = number;
+            } else {
+                int index = bisectLeft(lis, right, number);
+                lis[index] = number;
             }
         }
 
-        System.out.println(lis.size());
+        System.out.println(right+1);
     }
 
-    private static int bisectLeft(List<Integer> lcs, int find) {
+    private static int bisectLeft(int[] lcs, int right, int find) {
         int left = 0;
-        int right = lcs.size();
 
-        if (lcs.get(right-1) < find)
+        if (lcs[right] < find)
             return right;
 
         while (left < right) {
             int mid = left + right >> 1;
-            if (lcs.get(mid) < find)
+            if (lcs[mid] < find)
                 left = mid+1;
             else
                 right = mid;
