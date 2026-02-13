@@ -29,22 +29,20 @@ public class Main {
     }
 
     private static int[] bfs(List<Integer>[] graph, int n) {
-        Queue<int[]> q = new ArrayDeque<>();
-        q.add(new int[]{n, 0});
+        Queue<Integer> q = new ArrayDeque<>();
+        q.add(n);
 
         int[] counts = new int[n+1];
         Arrays.fill(counts, -1);
         counts[n] = 0;
 
         while (!q.isEmpty()) {
-            int[] first = q.poll();
-            int now = first[0];
-            int count = first[1];
+            int now = q.poll();
 
             for (int nxt: graph[now]) {
                 if (counts[nxt] == -1) {
-                    counts[nxt] = count+1;
-                    q.add(new int[]{nxt, count+1});
+                    counts[nxt] = counts[now] + 1;
+                    q.add(nxt);
                 }
             }
         }
