@@ -7,29 +7,26 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int[] nkt = Arrays.stream(br.readLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = nkt[0];
-        int k = nkt[1];
-        int t = nkt[2];
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+        int t = Integer.parseInt(st.nextToken());
 
-        int[][] locations = new int[n+1][];
-        locations[0] = Arrays.stream(br.readLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        int[][] locations = new int[n+1][3];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < 3; i++)
+            locations[0][i] = Integer.parseInt(st.nextToken());
 
         boolean[] isPicture = new boolean[n+1];
         for (int i = 1; i <= n; i++) {
-            int[] xyvp = Arrays.stream(br.readLine().split(" "))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+            st = new StringTokenizer(br.readLine());
 
-            locations[i] = new int[]{xyvp[0], xyvp[1], xyvp[2]};
-            isPicture[i] = xyvp[3] == 1;
+            for (int j = 0; j < 3; j++)
+                locations[i][j] = Integer.parseInt(st.nextToken());
+            isPicture[i] = st.nextToken().equals("1");
         }
-
+        
         List<Integer>[] graph = new ArrayList[n+1];
         for (int i = 0; i <= n; i++)
             graph[i] = new ArrayList<>();
