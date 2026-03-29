@@ -13,8 +13,8 @@ public class Main {
             numbers[i] = Integer.parseInt(br.readLine());
 
         // bubbleSort(numbers);
-        selectionSort(numbers);
-        // insertionSort(numbers);
+        // selectionSort(numbers);
+        insertionSort(numbers);
 
         StringBuilder answer = new StringBuilder();
         for (int number: numbers)
@@ -64,6 +64,8 @@ public class Main {
                 numbers[j+1] = numbers[j];
                 j--;
             }
+
+            numbers[j+1] = key;
         }
     }
 }
