@@ -17,7 +17,7 @@ public class Main {
 
         StringBuilder answer = new StringBuilder();
         for (int[] location: locations)
-            answer.append(location[0]).append(' ').append(location[1]).append('\n');
+            answer.append(location[0] + " " + location[1]).append('\n');
         System.out.println(answer);
     }
 }
