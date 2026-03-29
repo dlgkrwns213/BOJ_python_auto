@@ -12,15 +12,12 @@ public class Main {
                     .mapToInt(Integer::parseInt)
                     .toArray();
 
-        Arrays.sort(locations, (o1, o2) -> {
-            if (o1[0] == o2[0])
-                return o1[1] - o2[1];
-            return o1[0] - o2[0];
-        });
+        Arrays.sort(locations, Comparator.comparing((int[] location) -> location[0])
+                .thenComparing(location -> location[1]));
 
         StringBuilder answer = new StringBuilder();
         for (int[] location: locations)
-            answer.append(location[0] + " " + location[1]).append('\n');
+            answer.append(location[0]).append(' ').append(location[1]).append('\n');
         System.out.println(answer);
     }
 }
