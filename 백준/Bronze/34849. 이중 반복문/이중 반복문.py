@@ -1,0 +1,1 @@
+print('Time limit exceeded' if int(input()) > 10000 else 'Accepted')
