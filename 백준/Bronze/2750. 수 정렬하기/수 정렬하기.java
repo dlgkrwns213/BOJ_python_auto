@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -12,9 +11,7 @@ public class Main {
         for (int i = 0; i < n; i++)
             numbers[i] = Integer.parseInt(br.readLine());
 
-        // bubbleSort(numbers);
-        // selectionSort(numbers);
-        insertionSort(numbers);
+        mergeSort(numbers, 0, n-1);
 
         StringBuilder answer = new StringBuilder();
         for (int number: numbers)
@@ -22,50 +19,33 @@ public class Main {
         System.out.println(answer);
     }
 
-    private static void bubbleSort(int[] numbers) {
-        int n = numbers.length;
+    private static void mergeSort(int[] numbers, int left, int right) {
+        if (left >= right)
+            return;
 
-        for (int i = 0; i < n-1; i++) {
-            for (int j = 0; j < n-1-i; j++) {
-                if (numbers[j] > numbers[j+1]) {
-                    int tmp = numbers[j];
-                    numbers[j] = numbers[j+1];
-                    numbers[j+1] = tmp;
-                }
-            }
-        }
+        int mid = left + right >> 1;
+        mergeSort(numbers, left, mid);
+        mergeSort(numbers, mid+1, right);
+        merge(numbers, left, mid, right);
     }
 
-    private static void selectionSort(int[] numbers) {
-        int n = numbers.length;
+    private static void merge(int[] numbers, int left, int mid, int right) {
+        int[] tmp = new int[right-left+1];
 
-        for (int i = 0; i < n-1; i++) {
-            int minIdx = i;
+        int i = left;
+        int j = mid+1;
+        int k = 0;
 
-            for (int j = i+1; j < n; j++) {
-                if (numbers[j] < numbers[minIdx])
-                    minIdx = j;
-            }
-
-            int tmp = numbers[i];
-            numbers[i] = numbers[minIdx];
-            numbers[minIdx] = tmp;
+        while (i <= mid && j <= right) {
+            tmp[k++] = numbers[i] <= numbers[j] ? numbers[i++] : numbers[j++];
         }
-    }
 
-    private static void insertionSort(int[] numbers) {
-        int n = numbers.length;
+        while (i <= mid)
+            tmp[k++] = numbers[i++];
+        while (j <= right)
+            tmp[k++] = numbers[j++];
 
-        for (int i = 1; i < n; i++) {
-            int key = numbers[i];
-            int j = i-1;
-
-            while (j >= 0 && numbers[j] > key) {
-                numbers[j+1] = numbers[j];
-                j--;
-            }
-
-            numbers[j+1] = key;
-        }
+        for (int idx = 0; idx < right-left+1; idx++)
+            numbers[idx+left] = tmp[idx];
     }
 }
