@@ -20,7 +20,7 @@ def backtracking(now, time, apple, now_cant):
         if now_cant & (1 << nxt):
             continue
 
-        backtracking(nxt, time+1, apple + board[nx][ny], now_cant | (1 << now))
+        backtracking(nxt, time+1, apple + board[nx][ny], now_cant | (1 << nxt))
 
 
 board = [list(map(int, input().split())) for _ in range(5)]
@@ -33,5 +33,6 @@ for i in range(25):
         cant |= 1 << i
 
 mn_time = INF
-backtracking(r * 5 + c, 0, 0, cant)
+start = r * 5 + c
+backtracking(start, 0, 0, cant | (1 << start))
 print(mn_time if mn_time != INF else -1)
