@@ -18,9 +18,6 @@ for i in range(n):
         else:
             above.append((x, y))
 
-    below.sort()
-    above.sort()
-
     bi = 0
     bl = len(below)
 
