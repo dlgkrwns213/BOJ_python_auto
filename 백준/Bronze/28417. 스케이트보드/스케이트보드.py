@@ -1,0 +1,1 @@
+print(max(map(lambda line: max(line[:2]) + sum(sorted(line[2:])[-2:]), [list(map(int, input().split())) for _ in range(int(input()))])))
