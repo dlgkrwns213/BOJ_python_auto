@@ -11,5 +11,5 @@ while True:
     print(get_binary(y, y))
     print(get_binary(-x, 256-x))
     print(get_binary(-y, 256-y))
-    print(get_binary(x-y, x-y if x >= y else 256+x-y))
+    print(get_binary(x-y, x-y + (0 if x >= y else 256)))
     print()
