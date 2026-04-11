@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         while (true) {
             int[] xy = Arrays.stream(br.readLine().split(" "))
@@ -17,15 +18,17 @@ public class Main {
 
             if (x == 0 && y == 0) break;
 
-            System.out.println(getBinary(x, x));
-            System.out.println(getBinary(y, y));
-            System.out.println(getBinary(-x, 256 - x));
-            System.out.println(getBinary(-y, 256 - y));
-            System.out.println(getBinary(x - y, x - y + (x >= y ? 0 : 256)));
-            System.out.println();
+            sb.append(getBinary(x, x)).append('\n');
+            sb.append(getBinary(y, y)).append('\n');
+            sb.append(getBinary(-x, 256 - x)).append('\n');
+            sb.append(getBinary(-y, 256 - y)).append('\n');
+            sb.append(getBinary(x - y, x - y + (x >= y ? 0 : 256))).append('\n');
+            sb.append('\n');
         }
+
+        System.out.print(sb);
     }
-    
+
     private static String getBinary(int real, int binary) {
         String bin = Integer.toBinaryString(binary);
         String padded = ("0000000000" + bin);
