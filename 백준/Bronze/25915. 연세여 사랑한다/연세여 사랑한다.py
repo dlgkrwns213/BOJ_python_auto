@@ -1,1 +1,1 @@
-print(abs(ord(input())-ord('I'))+84)
+print(abs(ord(input())-73)+84)
